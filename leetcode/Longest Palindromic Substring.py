@@ -1,23 +1,19 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        res={}
+        res=''
         for i in range(0,len(s)):
-            for j in range(i+1,len(s)+1):
-                if s[i:j]==s[i:j][::-1]:
-                    length=len(s[i:j])
-                    res[length]=s[i:j]
-        return res[max(res.keys())]
-
-        
-    
-    def palin(self,x):
-        left=0
-        right=len(x)-1
-        while left<=right:
-            if x[left]==x[right]:
-                right=right-1
-                left=left+1
-            else:
-                return False
-        return True
-        
+            l=i
+            r=i
+            while l>=0 and r<len(s) and s[l]==s[r]:
+                if len(s[l:r+1])>len(res):
+                    res=s[l:r+1]
+                l=l-1
+                r=r+1
+            l=i
+            r=i+1
+            while l>=0 and r<len(s) and s[l]==s[r]:
+                if len(s[l:r+1])>len(res):
+                    res=s[l:r+1]
+                l=l-1
+                r=r+1
+        return res
